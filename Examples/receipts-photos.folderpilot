@@ -1,0 +1,18 @@
+# Office: receipts scanned to a shared folder, renamed and archived; originals copied to a backup.
+version: 1
+rules:
+- name: Scanned receipts
+  enabled: false
+  watch: ~/Documents/Scans
+  conditions:
+  - field: name
+    op: matches
+    value: '(?i)receipt|rcpt'
+  actions:
+  - type: copy
+    to: ~/Documents/Scans/Originals
+  - type: rename
+    pattern: '{date} Receipt'
+  - type: move
+    to: ~/Documents/Finance/Receipts/{year}
+    onConflict: rename

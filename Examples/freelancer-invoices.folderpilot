@@ -1,0 +1,20 @@
+# Freelancer: file incoming invoice PDFs by the date printed inside them.
+version: 1
+rules:
+- name: Freelancer invoices
+  enabled: false
+  watch: ~/Downloads
+  conditions:
+  - field: kind
+    op: is
+    value: pdf
+  - field: contents
+    op: contains
+    value: [invoice, tax invoice, bill to]
+  actions:
+  - type: rename
+    pattern: '{date} Invoice {name}'
+  - type: move
+    to: ~/Documents/Finance/Invoices/{year}/{month} {monthName}
+  - type: tag
+    tags: [Finance, Invoice]

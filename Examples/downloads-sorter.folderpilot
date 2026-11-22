@@ -1,0 +1,25 @@
+# Sort Downloads by kind into ~/Downloads/Sorted/<kind>. First match wins, so order matters.
+version: 1
+rules:
+- name: Installers to Trash after 14 days
+  enabled: false
+  watch: ~/Downloads
+  conditions:
+  - field: extension
+    op: is
+    value: [dmg, pkg]
+  - field: added
+    op: olderThan
+    value: 14d
+  actions:
+  - type: trash
+- name: Sort Downloads by kind
+  enabled: false
+  watch: ~/Downloads
+  conditions:
+  - field: kind
+    op: isNot
+    value: other
+  actions:
+  - type: move
+    to: Sorted/{kind}

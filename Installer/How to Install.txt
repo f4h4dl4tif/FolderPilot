@@ -1,0 +1,26 @@
+How to install FolderPilot
+==========================
+
+1. Drag FolderPilot onto the Applications folder in this window.
+
+2. Open FolderPilot from Applications. macOS will say it "could not verify
+   FolderPilot is free of malware". This happens because FolderPilot is a free,
+   open-source app that isn't notarized by Apple. Click "Done" (don't move it
+   to the Bin).
+
+3. Open System Settings > Privacy & Security, scroll down to the Security
+   section, and click "Open Anyway" next to FolderPilot. Enter your password
+   and click "Open Anyway" again. You only need to do this once.
+
+   Alternative (Terminal), after copying FolderPilot to Applications:
+       xattr -dr com.apple.quarantine /Applications/FolderPilot.app
+
+4. FolderPilot lives in your menu bar (folder icon) and opens its main window.
+   The two starter rules are switched off: review one, turn it on, or click
+   "Preview & Run" to see what it would do before anything moves.
+   macOS asks once for access to each folder you watch (Downloads, Desktop…).
+
+Optional: turn on "Launch FolderPilot at login" in FolderPilot > Settings.
+
+Requires macOS 14 Sonoma or later. Runs on Apple Silicon and Intel Macs.
+Free and open source (MIT License).
