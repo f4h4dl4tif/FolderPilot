@@ -49,8 +49,12 @@ final class AppModel: ObservableObject {
         history = journal.entries
         service.onEvent = { [weak self] _ in self?.refreshHistory() }
         service.update(rules: ruleSet.rules)
-        if !isPaused { service.start() }
+        AppModel.current = self
+        // A DEBUG glass-snapshot run only looks at the UI; it never watches folders or runs rules.
+        if !isPaused && !GlassSnapshot.isRequested { service.start() }
     }
+
+    static weak var current: AppModel?
 
     var enabledFolderCount: Int {
         Set(ruleSet.rules.filter(\.enabled).flatMap(\.watch.items)).count

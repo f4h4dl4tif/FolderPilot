@@ -43,6 +43,10 @@ struct FolderPilotApp: App {
 }
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        GlassSnapshot.runIfRequested()
+    }
+
     /// Keep watching folders from the menu bar after the window is closed.
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
 }

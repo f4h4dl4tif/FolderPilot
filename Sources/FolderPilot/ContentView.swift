@@ -81,6 +81,7 @@ struct RuleRow: View {
 
 struct StatusBar: View {
     @EnvironmentObject var model: AppModel
+    @AppStorage(GlassTheme.key) private var glassTheme = false
 
     var body: some View {
         HStack {
@@ -92,6 +93,6 @@ struct StatusBar: View {
                 .buttonStyle(.borderless).font(.caption)
         }
         .padding(.horizontal, 12).padding(.vertical, 8)
-        .background(.bar)
+        .pilotStatusBar(glass: glassTheme)
     }
 }

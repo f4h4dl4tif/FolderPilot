@@ -11,6 +11,7 @@ struct PreviewView: View {
     @State private var excluded: Set<UUID> = []
     @State private var applying = false
     @State private var resultText: String?
+    @AppStorage(GlassTheme.key) private var glassTheme = false
 
     private var actionable: [Plan] { (plans ?? []).filter { !$0.operations.isEmpty && !excluded.contains($0.id) } }
 
@@ -64,9 +65,11 @@ struct PreviewView: View {
                 Spacer()
                 Button(resultText == nil ? "Cancel" : "Done") { dismiss() }
                     .keyboardShortcut(.cancelAction)
+                    .pilotButton(glass: glassTheme)
                 if resultText == nil {
                     Button(applying ? "Applying…" : "Apply") { Task { await apply() } }
                         .keyboardShortcut(.defaultAction)
+                        .pilotButton(glass: glassTheme, prominent: true)
                         .disabled(actionable.isEmpty || applying)
                 }
             }
